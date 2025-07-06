@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Routine of Prophet Muhammad (PBUH)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          animation: {
+            fadeIn: 'fadeIn 1s ease-in-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .fade-in-card {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple::after {
+      content: '';
+      position: absolute;
+      border-radius: 9999px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 0, 0.25);
+      transform: scale(0);
+      animation: ripple-effect 0.6s linear;
+      opacity: 0;
+    }
+    @keyframes ripple-effect {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans transition-colors duration-500">
+  <header class="text-center py-6 bg-gradient-to-r from-amber-200 to-yellow-100 dark:from-gray-700 dark:to-gray-800">
+    <h1 id="mainTitle" class="text-2xl font-bold">The Daily Routine of Prophet Muhammad (PBUH)</h1>
+    <p id="subTitle" class="text-sm text-gray-600 dark:text-gray-300">A modern, multilingual, dynamic timeline</p>
+    <div class="mt-4 flex flex-wrap justify-center gap-4">
+      <div class="relative">
+        <select id="languageSelect" class="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-sm py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:ring-2 focus:ring-yellow-400 dark:text-white">
+          <option value="en">🇬🇧 English</option>
+          <option value="ms">🇲🇾 Malay</option>
+          <option value="zh">🇨🇳 中文</option>
+          <option value="ar">🇸🇦 العربية</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="ja">🇯🇵 日本語</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-white">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.516 7.548l4.484 4.484 4.484-4.484L15.516 9l-5.516 5.516L4.484 9z"/></svg>
+        </div>
+      </div>
+      <label for="darkToggle" class="inline-flex items-center cursor-pointer select-none text-sm">
+        <span class="mr-2 text-gray-700 dark:text-gray-300">Light</span>
+        <div class="relative">
+          <input type="checkbox" id="darkToggle" class="sr-only">
+          <div class="w-10 h-4 bg-gray-300 rounded-full shadow-inner dark:bg-gray-600"></div>
+          <div class="dot absolute w-6 h-6 bg-yellow-400 dark:bg-yellow-300 rounded-full shadow -left-1 -top-1 transition"></div>
+        </div>
+        <span class="ml-2 text-gray-700 dark:text-gray-300">Dark</span>
+      </label>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-6 animate-fadeIn">
+    <section id="currentActivity" class="mb-6">
+      <h2 id="currentActivityTitle" class="text-lg font-semibold mb-2">🔆 Current Activity</h2>
+      <div id="currentBlock" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+    <section id="timeline" class="grid grid-cols-1 md:grid-cols-2 gap-4"></section>
+  </main>
+
+  <footer class="text-center text-xs text-gray-500 dark:text-gray-400 py-6 border-t dark:border-gray-700">
+    Source: ProductiveMuslim.com
+  </footer>
+
+  <script>
+    function translateStaticText(lang) {
+      const titles = {
+        en: ["The Daily Routine of Prophet Muhammad (PBUH)", "A modern, multilingual, dynamic timeline", "🔆 Current Activity"],
+        ms: ["Rutian Harian Nabi Muhammad (SAW)", "Garis masa moden dan pelbagai bahasa", "🔆 Aktiviti Semasa"],
+        zh: ["先知穆罕默德（日常作息）", "现代多语言动态时间线", "🔆 当前活动"],
+        ar: ["الروتين اليومي للنبي محمد ﷺ", "خط زمني حديث ومتعدد اللغات", "🔆 النشاط الحالي"],
+        es: ["Rutina Diaria del Profeta Muhammad (PBUH)", "Cronología moderna y multilingüe", "🔆 Actividad Actual"],
+        fr: ["Routine Quotidienne du Prophète Muhammad (PSSL)", "Chronologie moderne multilingue", "🔆 Activité en cours"],
+        ja: ["預言者ムハンマドの日常生活（PBUH）", "モダンで多言語対応のタイムライン", "🔆 現在の活動"]
+      };
+      if (titles[lang]) {
+        document.getElementById('mainTitle').textContent = titles[lang][0];
+        document.getElementById('subTitle').textContent = titles[lang][1];
+        document.getElementById('currentActivityTitle').textContent = titles[lang][2];
+      }
+    }
+  </script>
+<script>
+  const routineData = {
+    en: [
+      { time: "Before End of Night", items: ["Takes a short nap when a sixth of the night is left"] },
+      { time: "At Dawn", items: ["Wakes up", "Uses siwak", "Expresses gratitude", "Listens to the call to prayer", "Prepares for prayer"] },
+      { time: "Fajr (Dawn Prayer)", items: ["Enters the mosque", "Leads prayer", "Talks with congregation"] },
+      { time: "After Sunrise", items: ["Prays two rak’ahs (units of prayer)", "Goes home", "Uses siwak again", "Greets his family", "Eats if there is food", "Fasts if not"] },
+      { time: "Morning Duties", items: ["Returns to the mosque", "Teaches Companions", "Handles social and political affairs"] },
+      { time: "Before Noon", items: ["Visits relatives", "Walks through the Madinah market", "Receives guests at home"] },
+      { time: "Lunch", items: ["Eats food received as gifts", "Eats communally with family, Companions, or the needy"] },
+      { time: "Dhuhr (Noon Prayer)", items: ["Leads prayer at mosque", "Addresses the congregation if needed", "Fulfills duties with his Companions"] },
+      { time: "Naptime", items: ["Takes a nap until close to Dhuhr prayer"] },
+      { time: "Asr (Afternoon Prayer)", items: ["Leads prayer at mosque", "Returns home afterward", "Spends quality time with entire family"] },
+      { time: "Maghrib (Dusk Prayer)", items: ["Leads the Companions in prayer", "Returns to the mosque", "Prays two rak’ahs (units of prayer)", "Spends time teaching Companions", "Handles social and political matters"] },
+      { time: "Dinner", items: ["Sometimes consists of only dates and water", "Has quality time with those present", "Praises God abundantly"] },
+      { time: "Isha (Night Prayer)", items: ["Leads prayer at the mosque", "Rarely gives a talk afterward", "Returns home to spend time with family", "May visit Companions’ homes"] },
+      { time: "Bedtime", items: ["Prepares for sleep", "Sleeps until midnight"] },
+      { time: "Midnight", items: ["Wakes up", "Performs night prayers at home or in the mosque", "Sometimes goes to the cemetery and prays for the deceased"] }
+    ],
+    ms: [
+  { time: "Sebelum Tamat Malam", items: ["Tidur sebentar ketika tinggal satu perenam malam"] },
+  { time: "Waktu Subuh", items: ["Bangun", "Menggunakan siwak", "Mengucap syukur", "Mendengar azan", "Bersiap untuk solat"] },
+  { time: "Solat Subuh", items: ["Masuk ke masjid", "Mengimamkan solat", "Berbual dengan jemaah"] },
+  { time: "Selepas Terbit Matahari", items: ["Solat dua rakaat", "Pulang ke rumah", "Guna siwak sekali lagi", "Menegur ahli keluarga", "Makan jika ada makanan", "Berpuasa jika tiada"] },
+  { time: "Tugas Pagi", items: ["Kembali ke masjid", "Mengajar para sahabat", "Urusan sosial dan politik"] },
+  { time: "Sebelum Tengah Hari", items: ["Menziarahi saudara", "Melalui pasar Madinah", "Menerima tetamu di rumah"] },
+  { time: "Makan Tengah Hari", items: ["Makan pemberian orang", "Makan bersama keluarga, sahabat, atau orang miskin"] },
+  { time: "Zohor", items: ["Solat berjemaah di masjid", "Berkhutbah jika perlu", "Melaksanakan tugasan bersama sahabat"] },
+  { time: "Tidur Tengah Hari", items: ["Tidur sebentar hingga hampir waktu Zohor"] },
+  { time: "Asar", items: ["Solat berjemaah", "Pulang ke rumah", "Bersama keluarga"] },
+  { time: "Maghrib", items: ["Mengimamkan solat", "Kembali ke masjid", "Solat dua rakaat", "Mengajar sahabat", "Urus hal sosial dan politik"] },
+  { time: "Makan Malam", items: ["Kadang hanya makan kurma dan air", "Meluangkan masa bersama", "Bersyukur dan memuji Allah"] },
+  { time: "Isyak", items: ["Solat berjemaah di masjid", "Jarang beri ucapan selepas solat", "Meluangkan masa dengan keluarga", "Kadang lawat rumah sahabat"] },
+  { time: "Waktu Tidur", items: ["Bersedia untuk tidur", "Tidur hingga tengah malam"] },
+  { time: "Tengah Malam", items: ["Bangun", "Solat malam di rumah atau masjid", "Ziarah kubur dan mendoakan yang telah meninggal"] }
+], zh: [
+  { time: "夜末之前", items: ["在夜晚最后六分之一时小睡"] },
+  { time: "黎明时分", items: ["起床", "使用齿木 (siwak)", "感恩", "听晨礼呼唤", "准备祷告"] },
+  { time: "晨礼 (Fajr)", items: ["进入清真寺", "主领晨礼", "与会众交流"] },
+  { time: "日出之后", items: ["祈祷两拜", "回家", "再次使用齿木", "问候家人", "若有食物则吃", "若无则禁食"] },
+  { time: "清晨事务", items: ["返回清真寺", "教导圣门弟子", "处理社会政治事务"] },
+  { time: "中午前", items: ["探望亲属", "经过麦地那市集", "在家接待来访者"] },
+  { time: "午餐", items: ["享用赠送的食物", "与家人、同伴或贫者共餐"] },
+  { time: "晌礼 (Dhuhr)", items: ["主领晌礼", "必要时讲话", "履行职责"] },
+  { time: "午休", items: ["在晌礼前小睡"] },
+  { time: "晡礼 (Asr)", items: ["主领晡礼", "之后回家", "与家人共度时光"] },
+  { time: "昏礼 (Maghrib)", items: ["主领昏礼", "返回清真寺", "祈祷两拜", "教学圣门弟子", "处理事务"] },
+  { time: "晚餐", items: ["有时只吃椰枣和水", "与众共度时光", "感恩赞美真主"] },
+  { time: "宵礼 (Isha)", items: ["主领宵礼", "很少再讲话", "与家人共处", "有时探访弟子"] },
+  { time: "就寝时间", items: ["准备睡觉", "睡到午夜"] },
+  { time: "午夜", items: ["起夜", "在家或清真寺进行夜间祷告", "有时前往墓地祈祷"] }
+], ar: [
+  { time: "قبل نهاية الليل", items: ["يأخذ قيلولة قصيرة عندما يتبقى سدس الليل"] },
+  { time: "عند الفجر", items: ["يستيقظ", "يستخدم السواك", "يشكر الله", "يستمع للأذان", "يستعد للصلاة"] },
+  { time: "صلاة الفجر", items: ["يدخل المسجد", "يؤم الناس في الصلاة", "يتحدث مع الصحابة"] },
+  { time: "بعد الشروق", items: ["يصلي ركعتين", "يعود إلى المنزل", "يستخدم السواك مرة أخرى", "يسلم على عائلته", "يأكل إن وجد طعامًا", "يصوم إن لم يجد"] },
+  { time: "مهام الصباح", items: ["يعود إلى المسجد", "يعلم الصحابة", "يتابع الشؤون الاجتماعية والسياسية"] },
+  { time: "قبل الظهر", items: ["يزور الأقارب", "يمشي في سوق المدينة", "يستقبل الضيوف في البيت"] },
+  { time: "الغداء", items: ["يأكل ما يُهدى إليه", "يأكل مع العائلة أو الصحابة أو المحتاجين"] },
+  { time: "الظهر", items: ["يؤم الناس في المسجد", "يلقي خطبة إن لزم الأمر", "يقوم بالمهام مع الصحابة"] },
+  { time: "قيلولة الظهر", items: ["يأخذ قيلولة حتى يقترب وقت الظهر"] },
+  { time: "العصر", items: ["يؤم الناس في الصلاة", "يعود للمنزل", "يقضي وقتًا مع العائلة"] },
+  { time: "المغرب", items: ["يؤم الصحابة", "يعود للمسجد", "يصلي ركعتين", "يعلم الصحابة", "يتابع الأمور العامة"] },
+  { time: "العشاء", items: ["أحيانًا يتناول تمرًا وماء فقط", "يقضي وقتًا طيبًا مع من حضر", "يسبح الله بعد الطعام"] },
+  { time: "صلاة العشاء", items: ["يؤم الصلاة في المسجد", "نادراً ما يتحدث بعدها", "يقضي وقتًا مع عائلته", "يزور بيوت الصحابة أحيانًا"] },
+  { time: "وقت النوم", items: ["يستعد للنوم", "ينام حتى منتصف الليل"] },
+  { time: "منتصف الليل", items: ["يستيقظ", "يصلي في البيت أو المسجد", "يزور المقابر ويدعو للأموات أحيانًا"] }
+], es: [
+  { time: "Antes de Finalizar la Noche", items: ["Toma una siesta breve cuando queda una sexta parte de la noche"] },
+  { time: "Al Amanecer", items: ["Se despierta", "Usa el siwak", "Expresa gratitud", "Escucha el llamado a la oración", "Se prepara para la oración"] },
+  { time: "Fajr (Oración del Amanecer)", items: ["Entra a la mezquita", "Dirige la oración", "Habla con la congregación"] },
+  { time: "Después del Amanecer", items: ["Ora dos rak'ahs (unidades de oración)", "Regresa a casa", "Usa el siwak nuevamente", "Saluda a su familia", "Come si hay comida", "Ayuna si no hay"] },
+  { time: "Deberes Matutinos", items: ["Vuelve a la mezquita", "Enseña a los Compañeros", "Atiende asuntos sociales y políticos"] },
+  { time: "Antes del Mediodía", items: ["Visita a familiares", "Camina por el mercado de Madinah", "Recibe invitados en casa"] },
+  { time: "Almuerzo", items: ["Come alimentos recibidos como regalos", "Come con la familia, compañeros o necesitados"] },
+  { time: "Dhuhr (Oración del Mediodía)", items: ["Dirige la oración en la mezquita", "Se dirige a la congregación si es necesario", "Cumple tareas con los Compañeros"] },
+  { time: "Siesta", items: ["Toma una siesta cercana a la oración de Dhuhr"] },
+  { time: "Asr (Oración de la Tarde)", items: ["Dirige la oración en la mezquita", "Vuelve a casa", "Pasa tiempo con su familia"] },
+  { time: "Maghrib (Oración del Ocaso)", items: ["Dirige la oración", "Regresa a la mezquita", "Ora dos rak'ahs", "Enseña a los Compañeros", "Atiende asuntos sociales y políticos"] },
+  { time: "Cena", items: ["A veces solo come dátiles y agua", "Comparte tiempo con quienes están presentes", "Alaba a Dios"] },
+  { time: "Isha (Oración Nocturna)", items: ["Dirige la oración en la mezquita", "Rara vez habla después", "Pasa tiempo con su familia", "A veces visita hogares de los Compañeros"] },
+  { time: "Hora de Dormir", items: ["Se prepara para dormir", "Duerme hasta medianoche"] },
+  { time: "Medianoche", items: ["Se despierta", "Ora en casa o en la mezquita", "A veces visita el cementerio y ora por los fallecidos"] }
+], fr: [
+  { time: "Avant la Fin de la Nuit", items: ["Fait une courte sieste lorsqu'un sixième de la nuit reste"] },
+  { time: "À l'Aube", items: ["Se réveille", "Utilise le siwak", "Exprime sa gratitude", "Écoute l'appel à la prière", "Se prépare pour la prière"] },
+  { time: "Fajr (Prière de l'Aube)", items: ["Entre à la mosquée", "Dirige la prière", "Parle avec la congrégation"] },
+  { time: "Après le Lever du Soleil", items: ["Fait deux rak'ahs", "Rentre à la maison", "Réutilise le siwak", "Salue sa famille", "Mange s’il y a de la nourriture", "Jeûne s’il n’y en a pas"] },
+  { time: "Tâches du Matin", items: ["Retourne à la mosquée", "Enseigne aux Compagnons", "Gère les affaires sociales et politiques"] },
+  { time: "Avant Midi", items: ["Rend visite aux proches", "Marche au marché de Médine", "Reçoit des invités chez lui"] },
+  { time: "Déjeuner", items: ["Mange des dons alimentaires", "Partage le repas avec la famille, les compagnons ou les nécessiteux"] },
+  { time: "Dhuhr (Prière de Midi)", items: ["Dirige la prière à la mosquée", "S’adresse à la congrégation si nécessaire", "Remplit ses devoirs avec les Compagnons"] },
+  { time: "Sieste", items: ["Fait une sieste jusqu’à l’approche de la prière de Dhuhr"] },
+  { time: "Asr (Prière de l’Après-midi)", items: ["Dirige la prière à la mosquée", "Retourne chez lui", "Passe du temps de qualité en famille"] },
+  { time: "Maghrib (Prière du Crépuscule)", items: ["Dirige la prière", "Retourne à la mosquée", "Fait deux rak'ahs", "Enseigne aux Compagnons", "Gère les affaires sociales et politiques"] },
+  { time: "Dîner", items: ["Parfois composé uniquement de dattes et d'eau", "Partage un bon moment avec ceux présents", "Loue abondamment Dieu"] },
+  { time: "Isha (Prière de Nuit)", items: ["Dirige la prière à la mosquée", "Donne rarement un discours après", "Passe du temps avec sa famille", "Peut visiter les foyers des Compagnons"] },
+  { time: "Heure du Coucher", items: ["Se prépare à dormir", "Dort jusqu'à minuit"] },
+  { time: "Minuit", items: ["Se réveille", "Fait la prière nocturne à la maison ou à la mosquée", "Parfois visite le cimetière et prie pour les défunts"] }
+], ja: [
+  { time: "夜の終わり前", items: ["夜の6分の1が残っているときに短い昼寝をする"] },
+  { time: "夜明け時", items: ["目を覚ます", "スィーワークを使う", "感謝の意を示す", "礼拝への呼びかけを聞く", "礼拝の準備をする"] },
+  { time: "ファジュル（夜明けの礼拝）", items: ["モスクに入る", "礼拝を導く", "信徒と会話する"] },
+  { time: "日の出後", items: ["2ラカア（礼拝の単位）を祈る", "家に帰る", "再びスィーワークを使う", "家族に挨拶する", "食べ物があれば食べる", "なければ断食する"] },
+  { time: "朝の務め", items: ["モスクに戻る", "仲間に教える", "社会・政治的な問題を扱う"] },
+  { time: "正午前", items: ["親戚を訪問する", "マディーナ市場を歩く", "自宅で来客を迎える"] },
+  { time: "昼食", items: ["贈られた食べ物を食べる", "家族や仲間、貧しい人々と一緒に食事する"] },
+  { time: "ズフル（正午の礼拝）", items: ["モスクで礼拝を導く", "必要に応じて会衆に話す", "仲間たちと職務を果たす"] },
+  { time: "昼寝", items: ["ズフル礼拝の少し前まで昼寝する"] },
+  { time: "アスル（午後の礼拝）", items: ["モスクで礼拝を導く", "その後帰宅する", "家族全員と質の高い時間を過ごす"] },
+  { time: "マグリブ（夕暮れの礼拝）", items: ["仲間と共に礼拝を導く", "モスクに戻る", "2ラカア祈る", "仲間に教える", "社会・政治的な問題を扱う"] },
+  { time: "夕食", items: ["時にはナツメヤシと水だけ", "同席者と楽しい時間を過ごす", "神に感謝する"] },
+  { time: "イシャー（夜の礼拝）", items: ["モスクで礼拝を導く", "その後ほとんど話さない", "家族と過ごす", "仲間の家を訪問することもある"] },
+  { time: "就寝時刻", items: ["眠る準備をする", "真夜中まで眠る"] },
+  { time: "真夜中", items: ["目を覚ます", "自宅やモスクで夜の礼拝をする", "墓地を訪れ、亡き者のために祈ることもある"] }
+]
+  };
+
+  const timeSlots = [
+    { start: 0, end: 4 }, { start: 4, end: 6 }, { start: 6, end: 7 }, { start: 7, end: 9 },
+    { start: 9, end: 10 }, { start: 10, end: 12 }, { start: 12, end: 13 }, { start: 13, end: 14 },
+    { start: 14, end: 15 }, { start: 15, end: 16 }, { start: 17, end: 18 }, { start: 18, end: 19 },
+    { start: 19, end: 20 }, { start: 20, end: 23 }, { start: 23, end: 24 }
+  ];
+
+  function renderTimeline(lang) {
+    const timelineWrapper = document.getElementById('timeline');
+    const currentWrapper = document.getElementById('currentBlock');
+    timelineWrapper.innerHTML = '';
+    currentWrapper.innerHTML = '';
+
+    const hour = new Date().getHours();
+    let currentIndex = timeSlots.findIndex(slot => hour >= slot.start && hour < slot.end);
+    if (currentIndex === -1) {
+      currentIndex = timeSlots.findIndex(slot => hour < slot.end);
+      if (currentIndex === -1) currentIndex = 0;
+    }
+
+    const routine = routineData[lang] || routineData["en"];
+    routine.forEach((section, idx) => {
+      const card = document.createElement('div');
+      card.className = "p-4 rounded-lg border hover:shadow transition bg-white dark:bg-gray-800 cursor-pointer fade-in-card ripple";
+      card.innerHTML = `
+        <h3 class="text-md font-bold mb-2">${section.time}</h3>
+        <ul class="list-disc pl-4 text-sm">${section.items.map(i => `<li>${i}</li>`).join('')}</ul>
+      `;
+      if (idx === currentIndex) {
+        card.classList.add('bg-yellow-100', 'dark:bg-yellow-900', 'shadow-md');
+        currentWrapper.appendChild(card);
+      } else {
+        timelineWrapper.appendChild(card);
+      }
+      observer.observe(card);
+    });
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.getElementById('languageSelect').addEventListener('change', (e) => {
+    const lang = e.target.value;
+    renderTimeline(lang);
+    translateStaticText(lang);
+  });
+
+  document.getElementById('darkToggle').addEventListener('change', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    const dot = document.querySelector('.dot');
+    dot.style.transform = isDark ? 'translateX(100%)' : 'translateX(0%)';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.getElementById('darkToggle').checked = true;
+    document.querySelector('.dot').style.transform = 'translateX(100%)';
+  }
+
+  renderTimeline('en');
+  translateStaticText('en');
+</script>
+</body>
+</html>
